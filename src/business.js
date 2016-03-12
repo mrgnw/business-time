@@ -51,4 +51,10 @@
   var eDisplayMoment = document.getElementById('displayMoment');
   eDisplayMoment.innerHTML = NowMoment.format('YYYY-M-D');
   var bob = moment().businessAdd(3)._d;
+
+  // format bob
+  bob = moment(bob).format('YYYY-M-D');
   console.log("BOB", bob);
+
+  var result = document.getElementById('displayResult');
+  result.innerHTML = bob;
