@@ -52,10 +52,10 @@ function getDateFromInput() {
   alert(result + " business days");
   return result;
 }
-function getBusinessDays(info) {
+function getBusinessDays(start) {
   // Todo: round down
   // Todo: accept yearless dates
-  var start = info.selectionText;
+  // var start = info.selectionText;
   var startMoment = moment(start);
   var now = moment();
   result = now.businessDiff(startMoment);
@@ -63,14 +63,23 @@ function getBusinessDays(info) {
   return result;
 }
 
+chrome.contextMenus.create({title: "Business days since %s",
+                             contexts:["selection"],
+                              onclick: function(info, tab){
+                                // sendSearch(info.selectionText);
+                                var diff = getBusinessDays(info.selectionText);
+                              }
+});
+
 chrome.commands.onCommand.addListener(function(command) {
-  if(command === "getBusinessDays") {
-    chrome.tabs.executeScript( {
-      code: "window.getSelection().toString();"
-    }, function(selection) {
-      getBusinessDays({selectionText: selection[0]});
-    });
-  }
+  var text = window.getSelection().toString();
+  // alert("COMMAND", text);
+    // chrome.tabs.executeScript( {
+    //   code: "window.getSelection().toString();"
+    // }, function(selection) {
+    //   console.log("SEL", selection);
+    //   // getBusinessDays({selectionText: selection[0]});
+    // });
 });
 
 // function addBdToDate(inputMoment, x) {
