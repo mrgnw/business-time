@@ -41,20 +41,61 @@
 
 }).call(this);
 
+// todo: pull date from selected text in Chrome
+// todo: accept multiple date types
+function getDateFromInput() {
+  // Todo: round down
+  // Todo: accept yearless dates
+  x = document.getElementById("dateInput").value;
+  now = moment();
+  result = now.businessDiff(x);
+  alert(result + " business days");
+  return result;
+}
+function getBusinessDays(info) {
+  // Todo: round down
+  // Todo: accept yearless dates
+  var start = info.selectionText;
+  var startMoment = moment(start);
+  var now = moment();
+  result = now.businessDiff(startMoment);
+  alert(result + " business days");
+  return result;
+}
 
-  // instantiate a moment object
-  // var moment = require('moment-business-days');
-  var NowMoment = moment();
+chrome.commands.onCommand.addListener(function(command) {
+  if(command === "getBusinessDays") {
+    chrome.tabs.executeScript( {
+      code: "window.getSelection().toString();"
+    }, function(selection) {
+      getBusinessDays({selectionText: selection[0]});
+    });
+  }
+});
 
-  // NowMoment = moment(NowMoment).businessAdd(3)._d;
+// function addBdToDate(inputMoment, x) {
+//   return inputMoment.businessAdd(x+1)._d.format('YYYY-M-D')
+// }
+//
+// function addBdToNow(x) {
+//   return addBDtoDate(moment(), x);
+// }
 
-  var eDisplayMoment = document.getElementById('displayMoment');
-  eDisplayMoment.innerHTML = NowMoment.format('YYYY-M-D');
-  var bob = moment().businessAdd(3)._d;
 
-  // format bob
-  bob = moment(bob).format('YYYY-M-D');
-  console.log("BOB", bob);
-
-  var result = document.getElementById('displayResult');
-  result.innerHTML = bob;
+// Sample moments
+// var NowMoment = moment();
+//
+// var eDisplayMoment = document.getElementById('displayMoment');
+// eDisplayMoment.innerHTML = NowMoment.format('YYYY-M-D');
+//
+// var customMoment = document.getElementById('customDate');
+//
+// // add 3 & 5 business days
+// var three = moment(moment().businessAdd(4)._d).format('YYYY-M-D');
+// var five = moment(moment().businessAdd(6)._d).format('YYYY-M-D');
+//
+// // format bob
+// console.log("THREE", three);
+//
+// var result = document.getElementById('displayResult');
+// result.innerHTML = five;

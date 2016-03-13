@@ -1,19 +1,22 @@
 {
-    "name": "Meteor Parties",
+    "name": "Business Time",
+    "description": "Calculate business days since the selected date",
     "version": "0.0.1",
     "manifest_version": 2,
-    "description": "Shows how many public parties there are",
+    "permissions": ["tabs", "contextMenus"],
+    "background": {
+        "scripts": ["src/moment.min.js", "src/business.js"]
+    },
+    "commands": {
+      "getBusinessDays": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+X"
+        },
+        "description": "Get business days since date"
+      }
+    },
     "icons": {
         "48": "images/icon48.png"
-    },
-    "browser_action": {
-        "default_icon": {
-            "19": "images/icon16.png"
-        },
-        "default_title": "Meteor Parties"
-    },
-    "background": {
-        "scripts": ["js/lib/jquery.min.js", "js/lib/meteor-ddp.js", "js/background.js"]
-    },
-    "homepage_url": "https://github.com/jperl/meteor-chrome-extension"
+    }
+
 }
