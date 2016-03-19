@@ -41,21 +41,8 @@
 
 }).call(this);
 
-// todo: pull date from selected text in Chrome
-// todo: accept multiple date types
-function getDateFromInput() {
-  // Todo: round down
-  // Todo: accept yearless dates
-  x = document.getElementById("dateInput").value;
-  now = moment();
-  result = now.businessDiff(x);
-  alert(result + " business days");
-  return result;
-}
 function getBusinessDays(start) {
-  // Todo: round down
   // Todo: accept yearless dates
-  // var start = info.selectionText;
   var startMoment = moment(start);
   var now = moment();
   result = Math.floor(now.businessDiff(startMoment));
@@ -66,45 +53,10 @@ function getBusinessDays(start) {
 chrome.contextMenus.create({title: "Business days since %s",
                              contexts:["selection"],
                               onclick: function(info, tab){
-                                // sendSearch(info.selectionText);
                                 var diff = getBusinessDays(info.selectionText);
                               }
 });
 
 chrome.commands.onCommand.addListener(function(command) {
   var text = window.getSelection().toString();
-  // alert("COMMAND", text);
-    // chrome.tabs.executeScript( {
-    //   code: "window.getSelection().toString();"
-    // }, function(selection) {
-    //   console.log("SEL", selection);
-    //   // getBusinessDays({selectionText: selection[0]});
-    // });
 });
-
-// function addBdToDate(inputMoment, x) {
-//   return inputMoment.businessAdd(x+1)._d.format('YYYY-M-D')
-// }
-//
-// function addBdToNow(x) {
-//   return addBDtoDate(moment(), x);
-// }
-
-
-// Sample moments
-// var NowMoment = moment();
-//
-// var eDisplayMoment = document.getElementById('displayMoment');
-// eDisplayMoment.innerHTML = NowMoment.format('YYYY-M-D');
-//
-// var customMoment = document.getElementById('customDate');
-//
-// // add 3 & 5 business days
-// var three = moment(moment().businessAdd(4)._d).format('YYYY-M-D');
-// var five = moment(moment().businessAdd(6)._d).format('YYYY-M-D');
-//
-// // format bob
-// console.log("THREE", three);
-//
-// var result = document.getElementById('displayResult');
-// result.innerHTML = five;
