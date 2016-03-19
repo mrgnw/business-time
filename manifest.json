@@ -3,18 +3,9 @@
     "description": "Calculate business days since the selected date",
     "version": "0.0.2",
     "manifest_version": 2,
-    "permissions": ["tabs", "contextMenus"],
+    "permissions": ["contextMenus"],
     "background": {
         "scripts": ["src/moment.min.js", "src/business.js"]
-    },
-
-    "commands": {
-      "getBusinessDays": {
-        "suggested_key": {
-          "default": "Ctrl+Shift+X"
-        },
-        "description": "Get business days since date"
-      }
     },
 
     "icons": {
