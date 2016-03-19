@@ -58,7 +58,7 @@ function getBusinessDays(start) {
   // var start = info.selectionText;
   var startMoment = moment(start);
   var now = moment();
-  result = now.businessDiff(startMoment);
+  result = Math.floor(now.businessDiff(startMoment));
   alert(result + " business days");
   return result;
 }

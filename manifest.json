@@ -1,7 +1,7 @@
 {
     "name": "Business Time",
     "description": "Calculate business days since the selected date",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "manifest_version": 2,
     "permissions": ["tabs", "contextMenus"],
     "background": {
